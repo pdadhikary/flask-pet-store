@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col text-center">
+                <img src="{{ url_for('static', filename='img/logo256.png') }}" alt="logo" width="150">
+                <h1>Login</h1>
+            </div>
+        </div>
+        <br>
+        <form method="POST" class="form-register needs-validation" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-row justify-content-md-center">
+                <div class="form-group col-md-6">
+                    {{ form.username.label() }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-at"></i></div>
+                        </div>
+                        {{ form.username(class="form-control", placeholder="Username", required=True) }}
+                        <div class="invalid-feedback">
+                            Please enter your Username
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row justify-content-md-center">
+                <div class="form-group col-md-6">
+                    {{ form.password.label() }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                        </div>
+                        {{ form.password(class="form-control", placeholder="Password", required=True) }}
+                        <div class="invalid-feedback">
+                            Please enter your Password
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row justify-content-md-center">
+                <div class="form-group col-md-6">
+                    <p>Do not have an account? <a class="btn btn-sm btn-success"
+                                                  href="{{ url_for('customer.register') }}">Register</a>
+                    </p>
+                </div>
+            </div>
+            <div class="form-row justify-content-md-center">
+                <div class="form-group col-md-6">
+                    {{ form.submit(class="btn btn-lg btn-info") }}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/form_validation.js') }}"></script>
+{% endblock %}
