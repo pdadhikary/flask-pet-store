@@ -24,11 +24,11 @@
                 <td>{{ product.brand }}</td>
                 <td>{{ product.category }}</td>
                 <td>{{ product.quantity }}</td>
-                <td>
-                    <button class="btn btn-outline-success" data-toggle="modal"
+                <td class="d-flex justify-content-center">
+                    <button class="btn btn-outline-success m-1" data-toggle="modal"
                             data-target="#productEditModal-{{ product.id }}">Edit
                     </button>
-                    <button class="btn btn-outline-danger" data-toggle="modal"
+                    <button class="btn btn-outline-danger m-1" data-toggle="modal"
                             data-target="#productDeleteModal-{{ product.id }}">Delete
                     </button>
                 </td>
@@ -51,7 +51,16 @@
 {% block admin_scripts %}
     <script>
         $(document).ready(function () {
-            $('#products-table').DataTable();
+            $('#products-table').DataTable({
+                "columns": [
+                    {"width": "5%"},
+                    {"width": "30%"},
+                    {"width": "16%"},
+                    {"width": "16%"},
+                    {"width": "8%"},
+                    {"width": "25%"},
+                ]
+            });
         });
     </script>
 {% endblock %}
