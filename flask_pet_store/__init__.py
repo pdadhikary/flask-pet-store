@@ -20,9 +20,11 @@ migrate = Migrate(app, db)
 
 from flask_pet_store.customer.routes import customer_blueprint
 from flask_pet_store.product.routes import product_blueprint
+from flask_pet_store.admin.routes import admin_blueprint
 
 app.register_blueprint(customer_blueprint, url_prefix='/customer')
 app.register_blueprint(product_blueprint, url_prefix='/products')
+app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
 
 # home page

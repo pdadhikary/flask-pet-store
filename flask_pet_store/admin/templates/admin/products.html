@@ -1,0 +1,57 @@
+{% extends 'admin/index.html' %}
+{% block title %} Manage Products {% endblock %}
+{% block admin_content %}
+    <h5>Manage Products</h5>
+    <br>
+    <table id="products-table" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            {% include 'admin/includes/edit_modal.html' %}
+            {% include 'admin/includes/delete_modal.html' %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.brand }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>
+                    <button class="btn btn-outline-success" data-toggle="modal"
+                            data-target="#productEditModal-{{ product.id }}">Edit
+                    </button>
+                    <button class="btn btn-outline-danger" data-toggle="modal"
+                            data-target="#productDeleteModal-{{ product.id }}">Delete
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th></th>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}
+
+{% block admin_scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#products-table').DataTable();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block styles %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    {% block admin_styles %} {% endblock %}
+{% endblock %}
+{% block title %} Admin Dashboard {% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <br>
+        <h2>Admin Panel</h2>
+        <br>
+        <ul class="nav flex-row admin-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('admin.index') }}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('admin.manage_products') }}">Manage Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">View Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Customers</a>
+            </li>
+        </ul>
+        <hr>
+        {% block admin_content %} {% endblock %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    {% block admin_scripts %} {% endblock %}
+{% endblock %}
