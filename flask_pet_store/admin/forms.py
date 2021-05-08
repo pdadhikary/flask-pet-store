@@ -3,7 +3,7 @@ from wtforms import StringField, SelectField, IntegerField, TextAreaField, Submi
 from wtforms.validators import DataRequired, Length, NumberRange
 
 
-class ProductEditForm(FlaskForm):
+class ProductUpsertForm(FlaskForm):
     name = StringField(label='Product Name', validators=[DataRequired(message='Product Name cannot be empty.')])
     brand = StringField(label='Brand Name', validators=[DataRequired(message='Brand Name cannot be empty.')])
     category = StringField(label='Category',

@@ -1,11 +1,11 @@
 {% extends 'admin/index.html' %}
-{% block title %} Edit Product {% endblock %}
+{% block title %} Upsert Product {% endblock %}
 {% block admin_content %}
-    <h5>Edit Product</h5>
+    <h5>Update/Insert Product</h5>
     <br>
     <form method="POST" class="form-register needs-validation" novalidate>
         {{ edit_form.hidden_tag() }}
-        <h6>You are about to edit the following product:</h6>
+        <h6>You are about to Update/Insert the following product:</h6>
         <br>
         <div class="form-row">
             <div class="form-group col-md-12">
