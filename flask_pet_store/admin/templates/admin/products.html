@@ -16,7 +16,6 @@
         </thead>
         <tbody>
         {% for product in products %}
-            {% include 'admin/includes/edit_modal.html' %}
             {% include 'admin/includes/delete_modal.html' %}
             <tr>
                 <td>{{ product.id }}</td>
@@ -25,9 +24,8 @@
                 <td>{{ product.category }}</td>
                 <td>{{ product.quantity }}</td>
                 <td class="d-flex justify-content-center">
-                    <button class="btn btn-outline-success m-1" data-toggle="modal"
-                            data-target="#productEditModal-{{ product.id }}">Edit
-                    </button>
+                    <a class="btn btn-outline-success m-1"
+                       href="{{ url_for('admin.edit_product', prodId=product.id) }}">Edit</a>
                     <button class="btn btn-outline-danger m-1" data-toggle="modal"
                             data-target="#productDeleteModal-{{ product.id }}">Delete
                     </button>
@@ -59,7 +57,8 @@
                     {"width": "16%"},
                     {"width": "8%"},
                     {"width": "25%"},
-                ]
+                ],
+                "stateSave": true
             });
         });
     </script>

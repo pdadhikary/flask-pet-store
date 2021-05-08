@@ -9,11 +9,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                Delete this product? {{ product.name }}
+                Delete this product? <strong>{{ product.name }}</strong>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <form method="POST">
+                    {{ delete_form.hidden_tag() }}
+                    <input id="product_name" name="product_name" type="hidden" value="{{ product.name }}">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{ delete_form.submit(class="btn btn-danger") }}
+                </form>
             </div>
         </div>
     </div>

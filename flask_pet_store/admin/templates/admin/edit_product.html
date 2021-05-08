@@ -1,0 +1,70 @@
+{% extends 'admin/index.html' %}
+{% block title %} Edit Product {% endblock %}
+{% block admin_content %}
+    <h5>Edit Product</h5>
+    <br>
+    <form method="POST" class="form-register needs-validation" novalidate>
+        {{ edit_form.hidden_tag() }}
+        <h6>You are about to edit the following product:</h6>
+        <br>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                {{ edit_form.name.label() }}
+                {{ edit_form.name(class="form-control", placeholder="Product Name", required=True) }}
+                <div class="invalid-feedback">
+                    Product Name can not be empty
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                {{ edit_form.brand.label() }}
+                {{ edit_form.brand(class="form-control", placeholder="Brand Name", required=True) }}
+                <div class="invalid-feedback">
+                    Brand Name can not be empty
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                {{ edit_form.category.label() }}
+                {{ edit_form.category(class="form-control", placeholder="Category", required=True) }}
+                <div class="invalid-feedback">
+                    Please select a category
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                {{ edit_form.quantity.label() }}
+                {{ edit_form.quantity(class="form-control", placeholder="Quatity", required=True) }}
+                <div class="invalid-feedback">
+                    Quantity can not be empty
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                {{ edit_form.description.label() }}
+                {{ edit_form.description(class="form-control",
+                                    placeholder="Product Description", required=True, maxlength=350, rows=5) }}
+                <div class="invalid-feedback">
+                    Product Description can not be empty
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-warning" href="{{ url_for('admin.manage_products') }}">Go Back</a>
+        {{ edit_form.submit(class="btn btn-success") }}
+    </form>
+{% endblock %}
