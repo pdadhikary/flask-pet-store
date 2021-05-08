@@ -17,7 +17,7 @@ def index():
 
 def delete_product_image(image_name):
     try:
-        if image_name != 'default.jpg':
+        if image_name and image_name != 'default.jpg':
             os.remove(os.path.join(current_app.root_path, product_image_upload, image_name))
     except OSError as error:
         print(f'File could not be deleted: {error}')
@@ -77,6 +77,7 @@ def manage_products():
         prodId = request.form.get('product_id')
         product_to_delete = Product.query.get(prodId)
         if product_to_delete:
+            delete_product_image(product_to_delete.product_image)
             db.session.delete(product_to_delete)
             db.session.commit()
             flash(message='Product successfully deleted!', category='success')
