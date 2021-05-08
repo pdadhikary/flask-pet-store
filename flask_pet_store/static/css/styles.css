@@ -7,6 +7,10 @@ html, body {
     color: #222;
 }
 
+main {
+    margin-top: 67px;
+}
+
 .navbar {
     padding: 0.8rem;
 }
@@ -18,4 +22,9 @@ html, body {
 .navbar-nav .btn {
     margin-top: 2px;
     margin-bottom: 2px;
+}
+
+.admin-nav .nav-item .nav-link {
+    padding-left: 0;
+    padding-right: 32px;
 }

@@ -20,7 +20,7 @@
 <body>
 <!-- Navbar -->
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ url_for('home_page') }}">
             <img src="{{ url_for('static', filename='img/logo.png') }}" width="30" height="30"
                  alt="Flask Pet Store logo">
@@ -37,7 +37,7 @@
                     <a class="nav-link" href="{{ url_for('home_page') }}">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('product.index') }}">Products</a>
+                    <a class="nav-link" href="{{ url_for('products.index') }}">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('customer.index') }}">My Account</a>

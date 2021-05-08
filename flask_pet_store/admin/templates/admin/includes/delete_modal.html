@@ -1,0 +1,24 @@
+<div class="modal fade" id="productDeleteModal-{{ product.id }}" tabindex="-1" aria-labelledby="productDeleteModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productDeleteModalLabel-{{ product.id }}">Delete Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this product? <strong>{{ product.name }}</strong>
+            </div>
+            <div class="modal-footer">
+                <form method="POST">
+                    {{ delete_form.hidden_tag() }}
+                    <input id="product_id" name="product_id" type="hidden" value="{{ product.id }}">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{ delete_form.submit(class="btn btn-danger") }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
