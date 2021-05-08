@@ -131,7 +131,7 @@ class Product(db.Model):
         'category', db.String(length=30), nullable=False
     )
     product_image = db.Column(
-        db.String(length=150), nullable=True
+        db.String(length=150), nullable=True, default='default.jpg'
     )
     quantity = db.Column(
         db.Integer(), nullable=False
