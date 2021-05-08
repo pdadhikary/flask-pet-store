@@ -146,7 +146,7 @@ class Product(db.Model):
 
     @name.setter
     def name(self, entered_name):
-        self.name = entered_name.strip().title()
+        self._name = entered_name.strip().title()
 
     @hybrid_property
     def brand(self):
