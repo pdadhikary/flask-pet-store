@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, IntegerField, TextAreaField, SubmitField
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, IntegerField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Length, NumberRange
 
 
@@ -17,6 +18,8 @@ class ProductUpsertForm(FlaskForm):
                                     Length(max=350,
                                            message='Description cannot be longer than 350 characters.')
                                 ])
+    product_image = FileField(label='Product Thumbnail', validators=[
+        FileAllowed(['jpeg', 'jpg', 'png'], message="File must be an image: .jpg, .jpeg, .png")])
     submit = SubmitField(label='Save Changes')
 
 
