@@ -121,14 +121,14 @@ class Product(db.Model):
     id = db.Column(
         db.Integer(), primary_key=True
     )
-    name = db.Column(
-        db.String(length=60), nullable=False
+    _name = db.Column(
+        'name', db.String(length=60), nullable=False
     )
-    brand = db.Column(
-        db.String(length=60), nullable=False
+    _brand = db.Column(
+        'brand', db.String(length=60), nullable=False
     )
-    category = db.Column(
-        db.String(length=30), nullable=False
+    _category = db.Column(
+        'category', db.String(length=30), nullable=False
     )
     product_image = db.Column(
         db.String(length=150), nullable=True
@@ -139,6 +139,30 @@ class Product(db.Model):
     description = db.Column(
         db.String(length=350), nullable=False
     )
+
+    @hybrid_property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, entered_name):
+        self.name = entered_name.strip().title()
+
+    @hybrid_property
+    def brand(self):
+        return self._brand
+
+    @brand.setter
+    def brand(self, entered_brand):
+        self._brand = entered_brand.strip().title()
+
+    @hybrid_property
+    def category(self):
+        return self._category
+
+    @category.setter
+    def category(self, entered_category):
+        self._category = entered_category.strip().title()
 
     def __repr__(self):
         return f'<Product> {self.name}'
