@@ -84,7 +84,6 @@ def manage_products():
             return redirect(url_for('admin.manage_products'))
         flash(message='Product cannot me found...', category='warning')
         return abort(404)
-
     if request.method == "GET":
         delete_form = ProductDeleteForm()
         products = Product.query.all()
