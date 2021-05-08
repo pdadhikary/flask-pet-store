@@ -17,7 +17,6 @@ def upsert_product(prodId):
     # Insert request
     if prodId == 0:
         product = Product()
-        print("new Product")
     if product:
         edit_form = ProductUpsertForm(obj=product)
         if edit_form.validate_on_submit():
@@ -44,8 +43,15 @@ def upsert_product(prodId):
 @admin_blueprint.route('/products', methods=['GET', 'POST'])
 def manage_products():
     if request.method == "POST":
-        print(f"Item Deleted: {request.form.get('product_name')}")
-        return redirect(url_for('admin.manage_products'))
+        prodId = request.form.get('product_id')
+        product_to_delete = Product.query.get(prodId)
+        if product_to_delete:
+            db.session.delete(product_to_delete)
+            db.session.commit()
+            flash(message='Product successfully deleted!', category='success')
+            return redirect(url_for('admin.manage_products'))
+        flash(message='Product cannot me found...', category='warning')
+        return abort(404)
 
     if request.method == "GET":
         delete_form = ProductDeleteForm()

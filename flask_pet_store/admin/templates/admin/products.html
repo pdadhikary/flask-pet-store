@@ -3,7 +3,8 @@
 {% block admin_content %}
     <div class="d-flex justify-content-between">
         <h5>Manage Products</h5>
-        <a class="btn btn-success" href="{{ url_for('admin.upsert_product', prodId=0) }}">Insert Product</a>
+        <a class="btn btn-success" href="{{ url_for('admin.upsert_product', prodId=0) }}"><i
+                class="fas fa-plus-square"></i>&nbsp;Insert Product</a>
     </div>
     <br>
     <table id="products-table" class="display" style="width:100%">
@@ -28,7 +29,7 @@
                 <td>{{ product.quantity }}</td>
                 <td class="d-flex justify-content-center">
                     <a class="btn btn-outline-success m-1"
-                       href="{{ url_for('admin.upsert_product', prodId=product.id) }}">Edit</a>
+                       href="{{ url_for('admin.upsert_product', prodId=product.id) }}">Update</a>
                     <button class="btn btn-outline-danger m-1" data-toggle="modal"
                             data-target="#productDeleteModal-{{ product.id }}">Delete
                     </button>
