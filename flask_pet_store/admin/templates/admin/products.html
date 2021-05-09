@@ -12,6 +12,7 @@
         <tr>
             <th>Product Id</th>
             <th>Product Name</th>
+            <th>Price</th>
             <th>Brand</th>
             <th>Category</th>
             <th>Quantity</th>
@@ -24,6 +25,7 @@
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
+                <td>${{ product.price }}</td>
                 <td>{{ product.brand }}</td>
                 <td>{{ product.category }}</td>
                 <td>{{ product.quantity }}</td>
@@ -41,6 +43,7 @@
         <tr>
             <th>Product Id</th>
             <th>Product Name</th>
+            <th>Price</th>
             <th>Brand</th>
             <th>Category</th>
             <th>Quantity</th>
@@ -57,8 +60,9 @@
                 "columns": [
                     {"width": "5%"},
                     {"width": "30%"},
+                    {"width": "8%"},
                     {"width": "16%"},
-                    {"width": "16%"},
+                    {"width": "8%"},
                     {"width": "8%"},
                     {"width": "25%"},
                 ],
