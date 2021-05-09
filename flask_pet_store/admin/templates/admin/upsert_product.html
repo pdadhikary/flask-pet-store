@@ -9,7 +9,7 @@
         <h6>You are about to Update/Insert the following product:</h6>
         <br>
         <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-9">
                 {{ edit_form.name.label() }}
                 {% if edit_form.name.errors %}
                     {{ edit_form.name(class="form-control is-invalid", placeholder="Product Name", required=True) }}
@@ -22,6 +22,24 @@
                     {{ edit_form.name(class="form-control", placeholder="Product Name", required=True) }}
                 {% endif %}
 
+            </div>
+            <div class="form-group col-md-3">
+                {{ edit_form.price.label() }}
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                    </div>
+                    {% if edit_form.price.errors %}
+                        {{ edit_form.price(class="form-control is-invalid", placeholder="Price", required=True) }}
+                        <div class="invalid-feedback">
+                            {% for error in edit_form.price.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ edit_form.price(class="form-control", placeholder="Price", required=True) }}
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="form-row">

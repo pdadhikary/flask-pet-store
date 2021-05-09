@@ -48,6 +48,7 @@ def upsert_product(prodId):
         edit_form = ProductUpsertForm(obj=product)
         if edit_form.validate_on_submit():
             product.name = edit_form.name.data
+            product.price = edit_form.price.data
             product.brand = edit_form.brand.data
             product.category = edit_form.category.data
             product.quantity = edit_form.quantity.data

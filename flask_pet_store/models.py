@@ -124,6 +124,9 @@ class Product(db.Model):
     _name = db.Column(
         'name', db.String(length=60), nullable=False
     )
+    price = db.Column(
+        db.Numeric(10, 2), nullable=False
+    )
     _brand = db.Column(
         'brand', db.String(length=60), nullable=False
     )
@@ -131,7 +134,7 @@ class Product(db.Model):
         'category', db.String(length=30), nullable=False
     )
     product_image = db.Column(
-        db.String(length=150), nullable=True, default='default.jpg'
+        db.String(length=150), nullable=False, default='default.jpg'
     )
     quantity = db.Column(
         db.Integer(), nullable=False

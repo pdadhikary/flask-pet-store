@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, IntegerField, TextAreaField, SubmitField
+from wtforms import StringField, IntegerField, TextAreaField, SubmitField, DecimalField
 from wtforms.validators import DataRequired, Length, NumberRange
 
 
 class ProductUpsertForm(FlaskForm):
     name = StringField(label='Product Name*', validators=[DataRequired(message='Product Name cannot be empty.')])
+    price = DecimalField(label='Price', places=2, validators=[DataRequired(message='Please enter a valid price.')])
     brand = StringField(label='Brand Name*', validators=[DataRequired(message='Brand Name cannot be empty.')])
     category = StringField(label='Category*',
                            validators=[DataRequired(message='Category cannot be empty.')])
