@@ -7,36 +7,38 @@
         <br>
         <h1>Registration Form</h1>
         <br>
-        <!-- TODO: Implement serverside validation using bootstrap classes -->
         <form method="POST" class="form-register needs-validation" novalidate>
             {{ form.hidden_tag() }}
             <div class="form-row">
                 <div class="form-group col-md-5">
                     {{ form.first_name.label() }}
-                    {{ form.first_name(class="form-control", placeholder="First Name", required=True) }}
-                    <div class="invalid-feedback">
-                        Please enter first name
-                    </div>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
+                    {% if form.first_name.errors %}
+                        {{ form.first_name(class="form-control is-invalid", placeholder="First Name", required=True) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.first_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.first_name(class="form-control", placeholder="First Name", required=True) }}
+                    {% endif %}
                 </div>
                 <div class="form-group col-md-5">
                     {{ form.last_name.label() }}
-                    {{ form.last_name(class="form-control", placeholder="Last Name", required=True) }}
-                    <div class="invalid-feedback">
-                        Please enter last name
-                    </div>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
+                    {% if form.last_name.errors %}
+                        {{ form.last_name(class="form-control is-invalid", placeholder="Last Name", required=True) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.last_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.last_name(class="form-control", placeholder="Last Name", required=True) }}
+                    {% endif %}
                 </div>
                 <div class="form-group col-md-2">
                     {{ form.sex.label() }}
                     {{ form.sex(class="form-control") }}
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
                 </div>
             </div>
             <div class="form-row">
@@ -46,13 +48,18 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                         </div>
-                        {{ form.email(class="form-control", placeholder="Email Address", type="email", required=True) }}
-                        <div class="invalid-feedback">
-                            Please enter a valid email address
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control is-invalid", placeholder="Email Address", type="email",
+                            required=True) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control", placeholder="Email Address", type="email",
+                            required=True) }}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -61,13 +68,17 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-at"></i></div>
                         </div>
-                        {{ form.username(class="form-control", placeholder="Username", required=True, minlength=1, maxlength=60) }}
-                        <div class="invalid-feedback">
-                            Username must between 1 and 60 characters
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control is-invalid", placeholder="Username", required=True, minlength=1, maxlength=60) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class="form-control", placeholder="Username", required=True, minlength=1, maxlength=60) }}
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
@@ -78,13 +89,16 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-lock"></i></div>
                         </div>
-                        {{ form.password1(class="form-control", placeholder="Password", minlength=6, required=True) }}
-                        <div class="invalid-feedback">
-                            Password must have more than 6 characters
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        {% if form.password1.errors %}
+                            {{ form.password1(class="form-control is-invalid", placeholder="Password", minlength=6, required=True) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password1.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password1(class="form-control", placeholder="Password", minlength=6, required=True) }}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -93,14 +107,18 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-lock"></i></div>
                         </div>
-                        {{ form.password2(class="form-control", placeholder="Confirm Password", oninput="checkPass(this)",
-                                minlength=6, required=True) }}
-                        <div class="invalid-feedback">
-                            Passwords do not match
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        {% if form.password2.errors %}
+                            {{ form.password2(class="form-control is-invalid", placeholder="Confirm Password",
+                            oninput="checkPass(this)", minlength=6, required=True) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password2.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password2(class="form-control", placeholder="Confirm Password",
+                            oninput="checkPass(this)", minlength=6, required=True) }}
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -111,13 +129,16 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
                         </div>
-                        {{ form.street_name(class="form-control", placeholder="Street Name", required=True) }}
-                        <div class="invalid-feedback">
-                            Please enter a street name
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        {% if form.street_name.errors %}
+                            {{ form.street_name(class="form-control is-invalid", placeholder="Street Name", required=True) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.street_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.street_name(class="form-control", placeholder="Street Name", required=True) }}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="form-group col-md-4">
@@ -126,24 +147,21 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-compass"></i></div>
                         </div>
-                        {{ form.city(class="form-control", placeholder="City", required=True) }}
-                        <div class="invalid-feedback">
-                            Please enter a city name
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        {% if form.city.errors %}
+                            {{ form.city(class="form-control is-invalid", placeholder="City", required=True) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.city.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.city(class="form-control", placeholder="City", required=True) }}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="form-group col-md-2">
                     {{ form.province.label() }}
                     {{ form.province(class="form-control", placeholder="Province", required=True) }}
-                    <div class="invalid-feedback">
-                        Please select a province
-                    </div>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
                 </div>
                 <div class="form-group col-md-2">
                     {{ form.zip_code.label() }}
@@ -151,32 +169,22 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-envelope-open-text"></i></div>
                         </div>
-                        {{ form.zip_code(class="form-control", placeholder="Zip Code",
+                        {% if form.zip_code.errors %}
+                            {{ form.zip_code(class="form-control is-invalid", placeholder="Zip Code",
                         pattern="^[A-Za-z][0-9][A-Za-z][ ]?[0-9][A-Za-z][0-9]$", required=True) }}
-                        <div class="invalid-feedback">
-                            Please enter a valid zip code
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                            <div class="invalid-feedback">
+                                {% for error in form.zip_code.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.zip_code(class="form-control", placeholder="Zip Code",
+                        pattern="^[A-Za-z][0-9][A-Za-z][ ]?[0-9][A-Za-z][0-9]$", required=True) }}
+                        {% endif %}
                     </div>
                 </div>
             </div>
             {{ form.submit(class="btn btn-lg btn-info") }}
         </form>
     </div>
-{% endblock %}
-
-{% block scripts %}
-    <script>
-        function checkPass(input) {
-            let pass1 = document.getElementById("password1");
-            if (input.value !== pass1.value) {
-                input.setCustomValidity("Passwords do not match");
-            } else {
-                input.setCustomValidity('');
-            }
-        }
-    </script>
-    <script src="{{ url_for('static', filename='js/form_validation.js') }}"></script>
 {% endblock %}

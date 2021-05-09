@@ -36,10 +36,10 @@ def register():
               category="success")
         return redirect(url_for('customer.index'))
 
-    if form.errors != {}:
-        for err_msg in form.errors.values():
-            msg = ", ".join(err_msg)
-            flash(message=f'There was an error: {msg}', category='danger')
+    # if form.errors != {}:
+    #     for err_msg in form.errors.values():
+    #         msg = ", ".join(err_msg)
+    #         flash(message=f'There was an error: {msg}', category='danger')
     return render_template('customer/register.html', form=form)
 
 

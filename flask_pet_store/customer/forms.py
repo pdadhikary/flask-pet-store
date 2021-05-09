@@ -15,26 +15,26 @@ class RegisterForm(FlaskForm):
         if customer:
             raise ValidationError(message="Email address is already in use! Try a different one.")
 
-    first_name = StringField(label='First Name', validators=[DataRequired(message="Please enter your First Name.")])
-    last_name = StringField(label='Last Name', validators=[DataRequired(message="Please enter your Last name.")])
-    email = StringField(label='Email Address', validators=[DataRequired(message="Please enter your Email Address"),
-                                                           Email(message="Email Address is not valid.")])
-    sex = SelectField(label='Sex', choices=[('Male', 'Male'), ('Female', 'Female'), ('X', 'X')],
+    first_name = StringField(label='First Name*', validators=[DataRequired(message="First Name cannot be empty.")])
+    last_name = StringField(label='Last Name*', validators=[DataRequired(message="Last name cannot be empty.")])
+    email = StringField(label='Email Address*', validators=[DataRequired(message="Email Address cannot be empty."),
+                                                            Email(message="Email Address is not valid.")])
+    sex = SelectField(label='Sex*', choices=[('Male', 'Male'), ('Female', 'Female'), ('X', 'X')],
                       validators=[DataRequired("Please choose your sex.")])
-    username = StringField(label='Username',
-                           validators=[DataRequired(message="Please enter a Username."),
+    username = StringField(label='Username*',
+                           validators=[DataRequired(message="Username cannot be empty."),
                                        Length(min=1, max=60, message="Username must be between 1 and 60 characters")])
-    password1 = PasswordField(label='Password', validators=[
-        DataRequired("Please choose a Password."),
+    password1 = PasswordField(label='Password*', validators=[
+        DataRequired("Password cannot be empty."),
         Length(min=6, message="Password must have at least 6 characters")
     ])
-    password2 = PasswordField(label='Confirm Password',
+    password2 = PasswordField(label='Confirm Password*',
                               validators=[DataRequired("Please confirm your Password"),
-                                          EqualTo('password1', message='Passwords must match.')])
-    street_name = StringField(label='Street Address',
+                                          EqualTo('password1', message='Passwords do not match.')])
+    street_name = StringField(label='Street Address*',
                               validators=[DataRequired("Please enter your Street Address")])
-    city = StringField(label='City', validators=[DataRequired(message="Please enter your City Name")])
-    province = SelectField(label='Province', choices=[
+    city = StringField(label='City*', validators=[DataRequired(message="Please enter your City Name")])
+    province = SelectField(label='Province*', choices=[
         ('ON', 'ON'),
         ('BC', 'BC'),
         ('QC', 'QC'),
@@ -49,7 +49,7 @@ class RegisterForm(FlaskForm):
         ('NT', 'NT'),
         ('NU', 'NU'),
     ], validators=[DataRequired(message="Please choose your Province of residence")])
-    zip_code = StringField(label='Zip Code',
+    zip_code = StringField(label='Zip Code*',
                            validators=[
                                DataRequired(message="Please enter your Canadian Zip Code"),
                                Regexp(regex="^[A-Za-z][0-9][A-Za-z][ ]?[0-9][A-Za-z][0-9]$",

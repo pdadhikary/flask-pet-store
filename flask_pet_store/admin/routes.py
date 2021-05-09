@@ -38,7 +38,7 @@ def save_product_image(form_image):
     return image_name
 
 
-@admin_blueprint.route('/products/<int:prodId>', methods=['GET', 'POST'])
+@admin_blueprint.route('/products/upsert/<int:prodId>', methods=['GET', 'POST'])
 def upsert_product(prodId):
     product = Product.query.get(prodId)
     # Insert request
@@ -52,8 +52,9 @@ def upsert_product(prodId):
             product.category = edit_form.category.data
             product.quantity = edit_form.quantity.data
             product.description = edit_form.description.data
-            if edit_form.product_image.data:
-                image_name = save_product_image(edit_form.product_image.data)
+            if edit_form.product_image_file.data:
+                print(edit_form.product_image_file.data)
+                image_name = save_product_image(edit_form.product_image_file.data)
                 delete_product_image(product.product_image)
                 product.product_image = image_name
             # Insert request
@@ -62,10 +63,6 @@ def upsert_product(prodId):
             db.session.commit()
             flash(message='Product successfully updated and inserted', category='success')
             return redirect(url_for('admin.manage_products'))
-        if edit_form.errors != {}:
-            for err_msg in edit_form.errors.values():
-                msg = ", ".join(err_msg)
-                flash(message=f'Could not update product: {msg}', category='danger')
         return render_template('admin/upsert_product.html', edit_form=edit_form, product=product)
     flash(message='Product cannot me found...', category='warning')
     return abort(status=404)
