@@ -3,7 +3,8 @@
 {% block admin_content %}
     <h5>Update/Insert Product</h5>
     <br>
-    <form method="POST" class="form-register needs-validation" novalidate>
+    <!-- TODO: Implement serverside validation using bootstrap classes -->
+    <form method="POST" enctype="multipart/form-data" class="form-register needs-validation" novalidate>
         {{ edit_form.hidden_tag() }}
         <h6>You are about to Update/Insert the following product:</h6>
         <br>
@@ -58,6 +59,18 @@
                                     placeholder="Product Description", required=True, maxlength=350, rows=5) }}
                 <div class="invalid-feedback">
                     Product Description can not be empty
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                {{ edit_form.product_image.label() }}
+                {{ edit_form.product_image(class="form-control-file") }}
+                <div class="invalid-feedback">
+                    Image error!
                 </div>
                 <div class="valid-feedback">
                     Looks good!
