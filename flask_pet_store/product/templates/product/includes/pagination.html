@@ -2,7 +2,8 @@
     <ul class="pagination justify-content-center">
         {% if products.has_prev %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('products.index', page=products.prev_num) }}">&laquo;</a>
+                <a class="page-link"
+                   href="{{ url_for('products.index', page=products.prev_num, brand=current_brand) }}">&laquo;</a>
             </li>
         {% else %}
             <li class="page-item disabled">
@@ -19,7 +20,7 @@
                 {% else %}
                     <li class="page-item">
                         <a class="page-link"
-                           href="{{ url_for('products.index', page=page_num) }}">{{ page_num }}</a>
+                           href="{{ url_for('products.index', page=page_num, brand=current_brand) }}">{{ page_num }}</a>
                     </li>
                 {% endif %}
             {% else %}
@@ -29,7 +30,7 @@
         {% if products.has_next %}
             <li class="page-item">
                 <a class="page-link"
-                   href="{{ url_for('products.index', page=products.next_num) }}">&raquo;</a>
+                   href="{{ url_for('products.index', page=products.next_num, brand=current_brand) }}">&raquo;</a>
             </li>
         {% else %}
             <li class="page-item disabled">

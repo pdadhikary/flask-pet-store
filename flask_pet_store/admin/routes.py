@@ -38,6 +38,7 @@ def save_product_image(form_image):
     return image_name
 
 
+# TODO: Resubmitting form without image should keep the old image
 @admin_blueprint.route('/products/upsert/<int:prodId>', methods=['GET', 'POST'])
 def upsert_product(prodId):
     product = Product.query.get(prodId)
