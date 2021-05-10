@@ -38,36 +38,33 @@ def save_product_image(form_image):
     return image_name
 
 
-# TODO: Resubmitting form without image should keep the old image
 @admin_blueprint.route('/products/upsert/<int:prodId>', methods=['GET', 'POST'])
 def upsert_product(prodId):
-    product = Product.query.get(prodId)
+    product = Product.query.get_or_404(prodId)
     # Insert request
     if prodId == 0:
         product = Product()
-    if product:
-        edit_form = ProductUpsertForm(obj=product)
-        if edit_form.validate_on_submit():
-            product.name = edit_form.name.data
-            product.price = edit_form.price.data
-            product.brand = edit_form.brand.data
-            product.category = edit_form.category.data
-            product.quantity = edit_form.quantity.data
-            product.description = edit_form.description.data
-            if edit_form.product_image_file.data:
-                print(edit_form.product_image_file.data)
-                image_name = save_product_image(edit_form.product_image_file.data)
-                delete_product_image(product.product_image)
-                product.product_image = image_name
-            # Insert request
-            if prodId == 0:
-                db.session.add(product)
-            db.session.commit()
-            flash(message='Product successfully updated and inserted', category='success')
-            return redirect(url_for('admin.manage_products'))
-        return render_template('admin/upsert_product.html', edit_form=edit_form, product=product)
-    flash(message='Product cannot me found...', category='warning')
-    return abort(status=404)
+
+    edit_form = ProductUpsertForm(obj=product)
+    if edit_form.validate_on_submit():
+        product.name = edit_form.name.data
+        product.price = edit_form.price.data
+        product.brand = edit_form.brand.data
+        product.category = edit_form.category.data
+        product.quantity = edit_form.quantity.data
+        product.description = edit_form.description.data
+        if edit_form.product_image_file.data:
+            print(edit_form.product_image_file.data)
+            image_name = save_product_image(edit_form.product_image_file.data)
+            delete_product_image(product.product_image)
+            product.product_image = image_name
+        # Insert request
+        if prodId == 0:
+            db.session.add(product)
+        db.session.commit()
+        flash(message='Product successfully updated and inserted', category='success')
+        return redirect(url_for('admin.manage_products'))
+    return render_template('admin/upsert_product.html', edit_form=edit_form, product=product)
 
 
 @admin_blueprint.route('/products', methods=['GET', 'POST'])
