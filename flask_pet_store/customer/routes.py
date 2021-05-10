@@ -7,6 +7,7 @@ from flask_login import login_user, logout_user, login_required
 customer_blueprint = Blueprint('customer', __name__, template_folder='templates')
 
 
+# TODO: Add functionality to update Customer Info
 @customer_blueprint.route('/')
 @login_required
 def index():

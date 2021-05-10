@@ -10,6 +10,7 @@ admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 product_image_upload = os.path.join('static', 'img', 'uploads', 'product_images')
 
 
+# TODO: Should only be accessible to ADMIN Users
 @admin_blueprint.route('/')
 def index():
     return render_template('admin/index.html')
