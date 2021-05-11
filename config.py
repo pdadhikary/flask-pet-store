@@ -1,3 +1,6 @@
+import os
+
+
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -9,6 +12,7 @@ class Config(object):
 
 
 class ProductionConfig(Config):
+    ENV = 'production'
     pass
 
 
@@ -16,5 +20,5 @@ class DevelopmentConfig(Config):
     ENV = 'development'
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///pet_store.db"
-    SECRET_KEY = "62fe21021befc0e49fb41bd4e3f10d887c3bfd87f9a0d425"
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     SESSION_COOKIE_SECURE = False

@@ -5,9 +5,10 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, current_user
 from flask_migrate import Migrate
 from flask_principal import Principal, identity_loaded, RoleNeed, UserNeed
+import os
 
 app = Flask(__name__)
-app.config.from_object("config.DevelopmentConfig")
+app.config.from_object(os.environ.get('CONFIG_OBJ'))
 
 db = SQLAlchemy(app)
 
@@ -50,6 +51,7 @@ app.register_blueprint(admin_blueprint, url_prefix='/admin')
 # home page
 @app.route('/')
 def home_page():
+    print(app.config.get('SECRET_KEY'))
     return render_template('index.html')
 
 
