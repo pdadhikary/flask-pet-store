@@ -5,24 +5,51 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner" role="listbox" style="max-height: 450px;">
+    <div id="product-carousel" class="carousel-inner" role="listbox" style="max-height: 450px;">
         <div class="carousel-item active">
             <img class="d-block img-fluid"
                  src="{{ url_for('static', filename='img/assets/carousel-0.jpg') }}"
-                 alt="First slide"
-                 style="object-fit: cover; object-position: center;"/>
+                 alt="First slide"/>
+            <div class="carousel-caption d-none d-md-block">
+                <h3>Your Pet Deserves the Best</h3>
+                <p>We curate products from trusted vendors all over Canada.</p>
+                <p style="font-size: 0.7em">Image Credit:
+                    <a target="_blank" style="color: white"
+                       href="https://unsplash.com/photos/9gz3wfHr65U">
+                        <strong>Krista Mangulsone, Unsplash</strong>
+                    </a>
+                </p>
+            </div>
         </div>
         <div class="carousel-item">
             <img class="d-block img-fluid"
                  src="{{ url_for('static', filename='img/assets/carousel-1.jpg') }}"
-                 alt="Second slide"
-                 style="object-fit: cover; object-position: center;"/>
+                 alt="Second slide"/>
+            <div class="carousel-caption d-none d-md-block">
+                <h3>Get Only the Best Here!</h3>
+                <p>We love their happiness as much as you do.</p>
+                <p style="font-size: 0.7em">Image Credit:
+                    <a target="_blank" style="color: white"
+                       href="https://unsplash.com/photos/NH1d0xX6Ldk">
+                        <strong>Justin Veenema, Unsplash</strong>
+                    </a>
+                </p>
+            </div>
         </div>
         <div class="carousel-item">
             <img class="d-block img-fluid"
                  src="{{ url_for('static', filename='img/assets/carousel-2.jpg') }}"
-                 alt="Third slide"
-                 style="object-fit: cover; object-position: center;"/>
+                 alt="Third slide"/>
+            <div class="carousel-caption d-none d-md-block">
+                <h3>We Have Some for Everybody</h3>
+                <p>No matter what pet you have, we got what you need!</p>
+                <p style="font-size: 0.7em">Image Credit:
+                    <a target="_blank" style="color: white"
+                       href="https://unsplash.com/photos/VBqVFzDtfBg">
+                        <strong>Tuolu Magazin, Unsplash</strong>
+                    </a>
+                </p>
+            </div>
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
