@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, IntegerField, TextAreaField, SubmitField, DecimalField
+from wtforms import StringField, IntegerField, TextAreaField, SubmitField, DecimalField, SelectField
 from wtforms.validators import DataRequired, Length, NumberRange
 
 
@@ -8,7 +8,15 @@ class ProductUpsertForm(FlaskForm):
     name = StringField(label='Product Name*', validators=[DataRequired(message='Product Name cannot be empty.')])
     price = DecimalField(label='Price', places=2, validators=[DataRequired(message='Please enter a valid price.')])
     brand = StringField(label='Brand Name*', validators=[DataRequired(message='Brand Name cannot be empty.')])
-    category = StringField(label='Category*',
+    category = SelectField(label='Category*',
+                           choices=[
+                               'Cat',
+                               'Dog',
+                               'Small Pet',
+                               'Fish',
+                               'Reptile',
+                               'Other'
+                           ],
                            validators=[DataRequired(message='Category cannot be empty.')])
     quantity = IntegerField(label='Quantity*',
                             validators=[DataRequired(message='Quantity must be an number.'),

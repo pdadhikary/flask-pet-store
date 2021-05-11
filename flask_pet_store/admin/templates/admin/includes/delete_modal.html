@@ -13,10 +13,10 @@
             </div>
             <div class="modal-footer">
                 <form method="POST">
-                    {{ delete_form.hidden_tag() }}
-                    <input id="product_id" name="product_id" type="hidden" value="{{ product.id }}">
+                    {{ delete_form.csrf_token(id='csrf_token-'+product.id|string) }}
+                    <input id="product_id-{{ product.id }}" name="product_id" type="hidden" value="{{ product.id }}">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    {{ delete_form.submit(class="btn btn-danger") }}
+                    {{ delete_form.submit(id='submit-'+product.id|string, class="btn btn-danger") }}
                 </form>
             </div>
         </div>

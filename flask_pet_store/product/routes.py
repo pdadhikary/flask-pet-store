@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_pet_store.models import Product
 from flask_pet_store.product.forms import SearchForm
+from sqlalchemy import or_
 
 product_blueprint = Blueprint('products', __name__, template_folder='templates')
 
@@ -24,7 +25,8 @@ def index():
     # filter products using arguments
     products = Product.query
     if q:
-        products = products.filter(Product.name.like(f'%{q}%'))
+        products = products.filter(or_(Product.name.like(f'%{q}%'),
+                                       Product.brand.like(f'%{q}%')))
     if brand:
         products = products.filter_by(brand=brand)
     products = products.paginate(per_page=6, page=page)

@@ -45,10 +45,10 @@ def save_product_image(form_image):
 @admin_blueprint.route('/products/upsert/<int:prodId>', methods=['GET', 'POST'])
 @admin_permission.require(403)
 def upsert_product(prodId):
-    product = Product.query.get_or_404(prodId)
-    # Insert request
-    if prodId == 0:
-        product = Product()
+    product = Product()
+
+    if prodId != 0:
+        product = Product.query.get_or_404(prodId)
 
     edit_form = ProductUpsertForm(obj=product)
     if edit_form.validate_on_submit():
@@ -59,7 +59,6 @@ def upsert_product(prodId):
         product.quantity = edit_form.quantity.data
         product.description = edit_form.description.data
         if edit_form.product_image_file.data:
-            print(edit_form.product_image_file.data)
             image_name = save_product_image(edit_form.product_image_file.data)
             delete_product_image(product.product_image)
             product.product_image = image_name

@@ -3,7 +3,7 @@
         {% if products.has_prev %}
             <li class="page-item">
                 <a class="page-link"
-                   href="{{ url_for('products.index', page=products.prev_num, brand=brand) }}">&laquo;</a>
+                   href="{{ url_for('products.index', q=q, page=products.prev_num, brand=brand) }}">&laquo;</a>
             </li>
         {% else %}
             <li class="page-item disabled">
@@ -20,7 +20,7 @@
                 {% else %}
                     <li class="page-item">
                         <a class="page-link"
-                           href="{{ url_for('products.index', page=page_num, brand=brand) }}">{{ page_num }}</a>
+                           href="{{ url_for('products.index', q=q, page=page_num, brand=brand) }}">{{ page_num }}</a>
                     </li>
                 {% endif %}
             {% else %}
@@ -30,7 +30,7 @@
         {% if products.has_next %}
             <li class="page-item">
                 <a class="page-link"
-                   href="{{ url_for('products.index', page=products.next_num, brand=brand) }}">&raquo;</a>
+                   href="{{ url_for('products.index', q=q, page=products.next_num, brand=brand) }}">&raquo;</a>
             </li>
         {% else %}
             <li class="page-item disabled">
