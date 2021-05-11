@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                {% if products.page == 1 %}
+                {% if products.page == 1 and not brand and not q %}
                     {% include 'product/includes/carousel.html' %}
                 {% endif %}
                 <div class="row my-4">
