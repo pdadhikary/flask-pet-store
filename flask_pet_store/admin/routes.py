@@ -2,16 +2,19 @@ from flask import Blueprint, render_template, url_for, redirect, request, flash,
 from flask_pet_store import db
 from flask_pet_store.models import Product
 from flask_pet_store.admin.forms import ProductDeleteForm, ProductUpsertForm
+from flask_principal import Permission, RoleNeed
 from PIL import Image
 import os
 import secrets
 
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 product_image_upload = os.path.join('static', 'img', 'uploads', 'product_images')
+admin_permission = Permission(RoleNeed('admin'))
 
 
 # TODO: Should only be accessible to ADMIN Users
 @admin_blueprint.route('/')
+@admin_permission.require(403)
 def index():
     return render_template('admin/index.html')
 
@@ -40,6 +43,7 @@ def save_product_image(form_image):
 
 
 @admin_blueprint.route('/products/upsert/<int:prodId>', methods=['GET', 'POST'])
+@admin_permission.require(403)
 def upsert_product(prodId):
     product = Product.query.get_or_404(prodId)
     # Insert request
@@ -69,6 +73,7 @@ def upsert_product(prodId):
 
 
 @admin_blueprint.route('/products', methods=['GET', 'POST'])
+@admin_permission.require(403)
 def manage_products():
     if request.method == "POST":
         prodId = request.form.get('product_id')
