@@ -51,7 +51,6 @@ app.register_blueprint(admin_blueprint, url_prefix='/admin')
 # home page
 @app.route('/')
 def home_page():
-    print(app.config.get('SECRET_KEY'))
     return render_template('index.html')
 
 

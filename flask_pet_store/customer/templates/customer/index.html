@@ -5,6 +5,85 @@
 {% block content %}
     <div class="container-fluid">
         <br>
-        <h2>Account Info</h2>
+        <h2 class="mb-3 px-3">Account Info</h2>
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Full Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ customer.first_name }} {{ customer.last_name }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Username</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ customer.username }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Sex</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ customer.sex }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email Address</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ customer.email }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Street Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ customer.street_name }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">City</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ customer.city }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Province</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ customer.province }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Zip Code</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ customer.zip_code }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-success mx-3" href="{{ url_for('customer.update') }}">Update Info</a>
+
     </div>
 {% endblock %}

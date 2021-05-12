@@ -1,0 +1,153 @@
+{% extends 'layout.html' %}
+
+{% block title %} Update User Info {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <h1>Update Your Information</h1>
+        <br>
+        <form method="POST" class="form-update needs-validation" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form.first_name.label() }}
+                    {% if form.first_name.errors %}
+                        {{ form.first_name(class="form-control is-invalid", placeholder="First Name", required=True) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.first_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.first_name(class="form-control", placeholder="First Name", required=True) }}
+                    {% endif %}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ form.last_name.label() }}
+                    {% if form.last_name.errors %}
+                        {{ form.last_name(class="form-control is-invalid", placeholder="Last Name", required=True) }}
+                        <div class="invalid-feedback">
+                            {% for error in form.last_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.last_name(class="form-control", placeholder="Last Name", required=True) }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    {{ form.username.label() }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-at"></i></div>
+                        </div>
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control is-invalid", placeholder="Username", required=True, minlength=1, maxlength=60) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class="form-control", placeholder="Username", required=True, minlength=1, maxlength=60) }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.sex.label() }}
+                    {{ form.sex(class="form-control") }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    {{ form.street_name.label() }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                        </div>
+                        {% if form.street_name.errors %}
+                            {{ form.street_name(class="form-control is-invalid", placeholder="Street Name", required=True) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.street_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.street_name(class="form-control", placeholder="Street Name", required=True) }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.city.label() }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-compass"></i></div>
+                        </div>
+                        {% if form.city.errors %}
+                            {{ form.city(class="form-control is-invalid", placeholder="City", required=True) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.city.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.city(class="form-control", placeholder="City", required=True) }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    {{ form.province.label() }}
+                    {{ form.province(class="form-control", placeholder="Province", required=True) }}
+                </div>
+                <div class="form-group col-md-2">
+                    {{ form.zip_code.label() }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-envelope-open-text"></i></div>
+                        </div>
+                        {% if form.zip_code.errors %}
+                            {{ form.zip_code(class="form-control is-invalid", placeholder="Zip Code",
+                        pattern="^[A-Za-z][0-9][A-Za-z][ ]?[0-9][A-Za-z][0-9]$", required=True) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.zip_code.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.zip_code(class="form-control", placeholder="Zip Code",
+                        pattern="^[A-Za-z][0-9][A-Za-z][ ]?[0-9][A-Za-z][0-9]$", required=True) }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form.verify_password.label() }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                        </div>
+                        {% if form.verify_password.errors %}
+                            {{ form.verify_password(class="form-control is-invalid", placeholder="Password", required=True) }}
+                            <div class="invalid-feedback">
+                                {% for error in form.verify_password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.verify_password(class="form-control", placeholder="Password", required=True) }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <a class="btn btn-lg btn-danger mr-2" href="{{ url_for('customer.index') }}">Go Back</a>
+            {{ form.submit(class="btn btn-lg btn-success") }}
+        </form>
+    </div>
+{% endblock %}

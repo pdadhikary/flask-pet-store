@@ -4,10 +4,10 @@ from wtforms import StringField, PasswordField, SubmitField, SelectField, Valida
 from wtforms.validators import Length, EqualTo, Email, DataRequired, Regexp
 
 
-class RegisterForm(FlaskForm):
+class CustomerForm(FlaskForm):
     def validate_username(self, username_to_check):
         customer = User.query.filter_by(username=username_to_check.data).first()
-        if customer:
+        if customer and customer.id != self.current_id:
             raise ValidationError(message="Username already exists! Please try a different Username.")
 
     def validate_email(self, email_address_to_check):
@@ -15,22 +15,14 @@ class RegisterForm(FlaskForm):
         if customer:
             raise ValidationError(message="Email address is already in use! Try a different one.")
 
+    current_id = None
     first_name = StringField(label='First Name*', validators=[DataRequired(message="First Name cannot be empty.")])
     last_name = StringField(label='Last Name*', validators=[DataRequired(message="Last name cannot be empty.")])
-    email = StringField(label='Email Address*', validators=[DataRequired(message="Email Address cannot be empty."),
-                                                            Email(message="Email Address is not valid.")])
     sex = SelectField(label='Sex*', choices=[('Male', 'Male'), ('Female', 'Female'), ('X', 'X')],
                       validators=[DataRequired("Please choose your sex.")])
     username = StringField(label='Username*',
                            validators=[DataRequired(message="Username cannot be empty."),
                                        Length(min=1, max=60, message="Username must be between 1 and 60 characters")])
-    password1 = PasswordField(label='Password*', validators=[
-        DataRequired("Password cannot be empty."),
-        Length(min=6, message="Password must have at least 6 characters")
-    ])
-    password2 = PasswordField(label='Confirm Password*',
-                              validators=[DataRequired("Please confirm your Password"),
-                                          EqualTo('password1', message='Passwords do not match.')])
     street_name = StringField(label='Street Address*',
                               validators=[DataRequired("Please enter your Street Address")])
     city = StringField(label='City*', validators=[DataRequired(message="Please enter your City Name")])
@@ -55,6 +47,25 @@ class RegisterForm(FlaskForm):
                                Regexp(regex="^[A-Za-z][0-9][A-Za-z][ ]?[0-9][A-Za-z][0-9]$",
                                       message="Zip Code is not valid.")
                            ])
+
+
+class UpdateForm(CustomerForm):
+    verify_password = PasswordField(label='Enter Your Password to Proceed*', validators=[
+        DataRequired("Please enter your password in order to complete update process.")
+    ])
+    submit = SubmitField(label='Update Account')
+
+
+class RegisterForm(CustomerForm):
+    email = StringField(label='Email Address*', validators=[DataRequired(message="Email Address cannot be empty."),
+                                                            Email(message="Email Address is not valid.")])
+    password1 = PasswordField(label='Password*', validators=[
+        DataRequired("Password cannot be empty."),
+        Length(min=6, message="Password must have at least 6 characters")
+    ])
+    password2 = PasswordField(label='Confirm Password*',
+                              validators=[DataRequired("Please confirm your Password"),
+                                          EqualTo('password1', message='Passwords do not match.')])
     submit = SubmitField(label='Create Account')
 
 
