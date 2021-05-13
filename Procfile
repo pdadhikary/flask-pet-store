@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn task_list:'create_app()'
+web: flask db upgrade; gunicorn -w 4 'flask_pet_store:create_app()'
