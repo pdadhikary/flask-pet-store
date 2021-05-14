@@ -18,7 +18,7 @@ class CustomerForm(FlaskForm):
     current_id = None
     first_name = StringField(label='First Name*', validators=[DataRequired(message="First Name cannot be empty.")])
     last_name = StringField(label='Last Name*', validators=[DataRequired(message="Last name cannot be empty.")])
-    sex = SelectField(label='Sex*', choices=[('Male', 'Male'), ('Female', 'Female'), ('X', 'X')],
+    sex = SelectField(label='Sex*', choices=[('M', 'Male'), ('F', 'Female'), ('X', 'X')],
                       validators=[DataRequired("Please choose your sex.")])
     username = StringField(label='Username*',
                            validators=[DataRequired(message="Username cannot be empty."),

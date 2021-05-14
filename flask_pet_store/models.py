@@ -47,7 +47,7 @@ class User(db.Model, UserMixin):
         'email', db.String(length=80), nullable=False, unique=True
     )
     username = db.Column(
-        db.String(length=60), nullable=False, unique=True
+        db.String(length=30), nullable=False, unique=True
     )
     _password_hash = db.Column(
         'password_hash', db.String(length=60), nullable=False
@@ -97,7 +97,7 @@ class User(db.Model, UserMixin):
 
     @password.setter
     def password(self, plain_text_password):
-        self._password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+        self._password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8', 'ignore')
 
     @hybrid_property
     def street_name(self):
@@ -138,25 +138,25 @@ class Product(db.Model):
         db.Integer(), primary_key=True
     )
     _name = db.Column(
-        'name', db.String(length=60), nullable=False
+        'name', db.String(length=120), nullable=False
     )
     price = db.Column(
         db.Numeric(10, 2), nullable=False
     )
     _brand = db.Column(
-        'brand', db.String(length=60), nullable=False
+        'brand', db.String(length=50), nullable=False
     )
     _category = db.Column(
-        'category', db.String(length=30), nullable=False
+        'category', db.String(length=50), nullable=False
     )
     product_image = db.Column(
-        db.String(length=150), nullable=False, default='default.jpg'
+        db.String(length=30), nullable=False, default='default.jpg'
     )
     quantity = db.Column(
         db.Integer(), nullable=False
     )
     description = db.Column(
-        db.String(length=350), nullable=False
+        db.String(length=500), nullable=False
     )
 
     @hybrid_property
