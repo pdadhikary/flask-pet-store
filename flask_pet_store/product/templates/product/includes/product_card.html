@@ -12,15 +12,17 @@
                style="height: 100px; overflow: hidden; text-overflow: ellipsis;">{{ product.description }}</p>
         </div>
         <div class="card-footer">
-            <label for="quantity-{{ product.id }}">Quantity:</label>
-            <select name="quantity" id="quantity-{{ product.id }}">
-                {% for option in range([product.quantity, 10]|min) %}
-                    <option value="{{ option + 1 }}">{{ option + 1 }}</option>
-                {% endfor %}
-            </select>
-            <a productId="{{ product.id }}"
-               productName="{{ product.name }}"
-               class="add-to-cart btn btn-sm btn-success">Add to Cart</a>
+            <form action="{{ url_for('products.add_to_cart') }}" method="POST">
+                <input name="id" type="hidden" value="{{ product.id }}">
+                <label for="amount-{{ product.id }}" style="font-size: 0.8rem">Amount:</label>
+                <select name="quantity" id="amount-{{ product.id }}">
+                    {% for option in range([product.quantity, 10]|min) %}
+                        <option value="{{ option + 1 }}">{{ option + 1 }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-sm btn-success float-right" style="margin-top: -0.2rem">Add to Cart
+                </button>
+            </form>
         </div>
     </div>
 </div>

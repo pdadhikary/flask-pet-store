@@ -1,14 +1,15 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_pet_store.models import Product
+from flask_pet_store.models import db, Product
 from flask_pet_store.product.forms import SearchForm
-from sqlalchemy import or_
+from sqlalchemy import or_, func
 
 product_blueprint = Blueprint('products', __name__, template_folder='templates')
 
 
-# TODO: get popular brands with most sales
 def get_brands():
-    return Product.query.group_by(Product.brand).with_entities(Product.brand).limit(5).all()
+    brands = db.session.query(Product.brand).group_by(Product.brand).order_by(func.count().desc()).limit(5).all()
+    brands = [x[0] for x in brands]
+    return brands
 
 
 @product_blueprint.route('/', methods=['GET', 'POST'])
@@ -25,8 +26,9 @@ def index():
     # filter products using arguments
     products = Product.query
     if q:
-        products = products.filter(or_(Product.name.like(f'%{q}%'),
-                                       Product.brand.like(f'%{q}%')))
+        products = products.filter(or_(Product.name.ilike(f'%{q}%'),
+                                       Product.brand.ilike(f'%{q}%'),
+                                       Product.description.ilike(f'%{q}%')))
     if brand:
         products = products.filter_by(brand=brand)
     products = products.paginate(per_page=6, page=page)
@@ -34,3 +36,12 @@ def index():
     return render_template('product/index.html', search_form=search_form,
                            products=products, brands=get_brands(),
                            q=q, brand=brand)
+
+
+@product_blueprint.route('/cart/add', methods=['POST'])
+def add_to_cart():
+    print({
+        'id': request.form.get('id'),
+        'quantity': request.form.get('quantity')
+    })
+    return redirect(request.referrer)
