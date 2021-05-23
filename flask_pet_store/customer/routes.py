@@ -105,6 +105,6 @@ def logout():
     # Tell Flask-Principal the user is anonymous
     identity_changed.send(current_app._get_current_object(),
                           identity=AnonymousIdentity())
-
+    session.pop('cart', None)
     flash(message="You have been logged out", category="info")
     return redirect(url_for('customer.login'))

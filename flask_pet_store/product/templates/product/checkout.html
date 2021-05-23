@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block title %} Checkout {% endblock %}
+{% block content %}
+    <br>
+    <div class="container-fluid">
+        <h2>Checkout</h2>
+        <br>
+        {% for product in cart %}
+            <div class="row">
+                <div class="col-md-3 d-flex justify-content-center">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='img/uploads/product_images/' + product.img) }}"
+                             alt="product image for {{ product.name }}"
+                             style="max-height: 150px; object-fit: contain">
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <h5>{{ product.name }}</h5>
+                    <p>{{ product.brand }}</p>
+                    <p>Price: ${{ product.unit_price }}</p>
+                </div>
+                <div class="col-md-1">
+                    <h5>&times;{{ product.quantity }}</h5>
+                </div>
+                <div class="col-md-2">
+                    <h5>$ {{ product.total }}</h5>
+                </div>
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-sm btn-success">Edit</a>
+                    <form class="d-inline" action="{{ url_for('products.remove_form_cart') }}" method="post">
+                        <input type="hidden" name="id" value="{{ product.id }}">
+                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        {% if cart|length == 0 %}
+            <h4>Looks like your cart is empty....</h4>
+            <p>Go do some <a href="{{ url_for('products.index') }}">shopping!</a></p>
+        {% endif %}
+        <h3>Total: ${{ sum_price }}</h3>
+    </div>
+    <br>
+{% endblock %}

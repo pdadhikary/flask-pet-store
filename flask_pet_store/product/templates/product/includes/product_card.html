@@ -1,0 +1,28 @@
+<div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100">
+        <a href="#"><img class="card-img-top product-image"
+                         src="{{ url_for('static', filename='img/uploads/product_images/'
+                                                  + product.product_image) }}"
+                         alt="product image for {{ product.name }}"
+                         style="max-height: 200px; object-fit: contain"/></a>
+        <div class="card-body">
+            <h4 class="card-title"><a href="#">{{ product.name }}</a></h4>
+            <h5>${{ product.price }}</h5>
+            <p class="card-text"
+               style="height: 100px; overflow: hidden; text-overflow: ellipsis;">{{ product.description }}</p>
+        </div>
+        <div class="card-footer">
+            <form action="{{ url_for('products.add_to_cart') }}" method="POST">
+                <input name="id" type="hidden" value="{{ product.id }}">
+                <label for="amount-{{ product.id }}" style="font-size: 0.8rem">Amount:</label>
+                <select name="quantity" id="amount-{{ product.id }}">
+                    {% for option in range([product.quantity, 10]|min) %}
+                        <option value="{{ option + 1 }}">{{ option + 1 }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-sm btn-success float-right" style="margin-top: -0.2rem">Add to Cart
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

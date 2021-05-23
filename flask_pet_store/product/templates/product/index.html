@@ -27,13 +27,13 @@
             <div class="col-lg-3">
                 <h3 class="my-4">Popular Brands</h3>
                 <div class="list-group">
-                    {% for item in brands %}
-                        {% if item.brand == brand %}
+                    {% for b in brands %}
+                        {% if b == brand %}
                             <a class="list-group-item active"
-                               href="{{ url_for('products.index', brand=item.brand) }}">{{ item.brand }}</a>
+                               href="{{ url_for('products.index', brand=b) }}">{{ b }}</a>
                         {% else %}
                             <a class="list-group-item"
-                               href="{{ url_for('products.index', brand=item.brand) }}">{{ item.brand }}</a>
+                               href="{{ url_for('products.index', brand=b) }}">{{ b }}</a>
                         {% endif %}
                     {% endfor %}
                     <a class="list-group-item"
@@ -46,23 +46,7 @@
                 {% endif %}
                 <div class="row my-4">
                     {% for product in products.items %}
-
-                        <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="card h-100">
-                                <a href="#"><img class="card-img-top product-image"
-                                                 src="{{ url_for('static', filename='img/uploads/product_images/'
-                                                  + product.product_image) }}"
-                                                 alt="product image for {{ product.name }}"
-                                                 style="max-height: 200px; object-fit: contain"/></a>
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="#">{{ product.name }}</a></h4>
-                                    <h5>${{ product.price }}</h5>
-                                    <p class="card-text"
-                                       style="height: 100px; overflow: hidden; text-overflow: ellipsis;">{{ product.description }}</p>
-                                </div>
-                                <div class="card-footer"><a class="btn btn-sm btn-success">Add to Cart</a></div>
-                            </div>
-                        </div>
+                        {% include 'product/includes/product_card.html' %}
                     {% endfor %}
                 </div>
                 {% include 'product/includes/pagination.html' %}
