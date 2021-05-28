@@ -16,20 +16,22 @@
             {{ form.hidden_tag() }}
             <div class="form-row justify-content-md-center">
                 <div class="form-group col-md-6">
-                    {{ form.username.label() }}
+                    {{ form.login_name.label() }}
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-at"></i></div>
                         </div>
-                        {% if form.username.errors %}
-                            {{ form.username(class="form-control is-invalid", placeholder="Username", required=True) }}
+                        {% if form.login_name.errors %}
+                            {{ form.login_name(class="form-control is-invalid", placeholder="Username",
+                            required=True) }}
                             <div class="invalid-feedback">
-                                {% for error in form.username.errors %}
+                                {% for error in form.login_name.errors %}
                                     <span>{{ error }}</span>
                                 {% endfor %}
                             </div>
                         {% else %}
-                            {{ form.username(class="form-control", placeholder="Username", required=True) }}
+                            {{ form.login_name(class="form-control", placeholder="Username",
+                            required=True) }}
                         {% endif %}
                     </div>
                 </div>

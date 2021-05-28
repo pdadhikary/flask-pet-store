@@ -6,7 +6,8 @@ from wtforms.validators import Length, EqualTo, Email, DataRequired, Regexp
 
 class CustomerForm(FlaskForm):
     def validate_username(self, username_to_check):
-        customer = User.query.filter_by(username=username_to_check.data).first()
+        customer = User.query.filter_by(username=username_to_check.data).first() or User.query.filter_by(
+            email=username_to_check.data).first()
         if customer and customer.id != self.current_id:
             raise ValidationError(message="Username already exists! Please try a different Username.")
 
@@ -70,6 +71,7 @@ class RegisterForm(CustomerForm):
 
 
 class LoginForm(FlaskForm):
-    username = StringField(label="Username", validators=[DataRequired(message="Please enter your Username")])
+    login_name = StringField(label="Username or Email Address",
+                             validators=[DataRequired(message="Please enter your Username/Email Address")])
     password = PasswordField(label="Password", validators=[DataRequired(message="Please enter your Password")])
     submit = SubmitField(label="Login")

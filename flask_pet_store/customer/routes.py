@@ -66,10 +66,9 @@ def register():
         db.session.add(user_to_create)
         db.session.commit()
 
-        login_user(user_to_create)
-        flash(message=f"Account successfully created! You are now logged in as: {user_to_create.username}",
+        flash(message=f"Account successfully created! Please verify you email to Sign In",
               category="success")
-        return redirect(url_for('customer.index'))
+        return redirect(url_for('customer.login'))
 
     return render_template('customer/register.html', form=form)
 
@@ -79,7 +78,7 @@ def login():
     form = LoginForm()
     next_url = request.args.get('next', default=None)
     if form.validate_on_submit():
-        customer = User.query.filter_by(username=form.username.data).first()
+        customer = getCustomer(login_name=form.login_name.data)
         if customer and customer.verify_password(
                 input_password=form.password.data
         ):
@@ -108,3 +107,8 @@ def logout():
     session.pop('cart', None)
     flash(message="You have been logged out", category="info")
     return redirect(url_for('customer.login'))
+
+
+def getCustomer(login_name):
+    return User.query.filter_by(username=login_name).first() or User.query.filter_by(
+        email=login_name).first()
