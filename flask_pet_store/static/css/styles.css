@@ -5,8 +5,8 @@ html, body {
     color: #222;
 }
 
-main {
-    margin-top: 67px;
+.navbar-spacer {
+    height: 67px;
 }
 
 .navbar {

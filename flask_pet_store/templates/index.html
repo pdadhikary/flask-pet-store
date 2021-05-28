@@ -1,13 +1,90 @@
-{% extends 'layout.html' %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Customized CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>
+        FlaskPetStore | Home Page
+    </title>
+</head>
+<body>
 
-{% block title %} Home {% endblock %}
+<header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand m-auto font-weight-bold" href="{{ url_for('home_page') }}" style="color: #233478">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" width="30" height="30"
+                 alt="Flask Pet Store logo">
+            Flask:Pet:Store
+        </a>
+    </nav>
+</header>
 
-{% block content %}
+<main>
     <div class="container-fluid">
-        <br>
-        <h2>Hello World</h2>
-        <br>
-        <a class="btn btn-primary" href="{{ url_for('products.index') }}">Shop Now</a>
-        <a class="btn btn-secondary" href="{{ url_for('admin.index') }}">Admin Panel</a>
+        <div class="row" style="height: 100vh;">
+            <div class="col-md-6 d-flex justify-content-center align-items-start">
+                <section style="width: 90%; margin-top: 120px">
+                    <h2 class="">What wouldn't we do for our pets...</h2>
+                    <p class="lead">They deserve only the best! And that’s why we curate products from trusted vendors
+                        all across
+                        Canada.</p>
+                    <br>
+                    <a class="btn btn-lg btn-primary mr-2" href="{{ url_for('products.index') }}">Shop Now</a>
+                    {% if not current_user.is_authenticated %}
+                        <a class="btn btn-lg btn-success" href="{{ url_for('customer.login') }}">Log In</a>
+                    {% endif %}
+                </section>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <img src="{{ url_for('static', filename='img/assets/Dog walking_Flatline.svg') }}"
+                     alt="man walking dog" style="width: 100%; max-width: 730px">
+            </div>
+        </div>
+        <div class="navbar-spacer"></div>
+        <div class="row" style="height: 100vh;">
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <img src="{{ url_for('static', filename='img/assets/undraw_friends_r511.svg') }}"
+                     alt="man walking dog" style="width: 65%; max-width: 500px">
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <section style="width: 90%; margin-top: 120px">
+                    <h2>Join the community today!</h2>
+                    <p class="lead"> we are here for you and you bestest buddies!</p>
+
+                    <form action="{{ url_for('customer.register') }}" method="post">
+                        <div class="input-group" style="width: 350px">
+                            <label for="email"></label>
+                            <input id="email" class="form-control" name="email" type="text" placeholder="Email Address">
+                            <button class="btn btn-success input-group-append ml-2" type="submit">Sign Up</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
     </div>
-{% endblock %}
+</main>
+
+<!-- Scripts -->
+<script src="https://kit.fontawesome.com/6d153d24c3.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+<!-- Customized Scripts -->
+{% block scripts %} {% endblock %}
+</body>
+</html>
